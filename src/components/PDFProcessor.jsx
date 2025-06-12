@@ -89,7 +89,8 @@ const PDFProcessor = () => {
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Querio AI instantly creates exam-style questions from notes or text. 
-            Ideal for exam prep. No Sign up required. Completely free to use.
+            Ideal for exam prep. No Sign up required. Completely free to use.Just paste 
+            youtube video link or notes/Upload PDF to get started.
           </p>
         </div>
 
