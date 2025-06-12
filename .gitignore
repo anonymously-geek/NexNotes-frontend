@@ -28,3 +28,5 @@ yarn-error.log*
 
 "node_modules\n.env\n.env.local\n.next\nbuild\ndist\n.DS_Store" 
 .vercel
+
+.vercel

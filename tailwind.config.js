@@ -4,6 +4,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%)',
+      },
       animation: {
         'gradient': 'gradient 15s ease infinite',
         'fadeIn': 'fadeIn 0.5s ease-out forwards',
