@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiUpload, FiFileText, FiBook } from 'react-icons/fi';
+console.log("🧠 PDFProcessor v100 is active");
 
 const PDFProcessor = () => {
   const [mode, setMode] = useState('questions'); // 'questions' or 'summary'
@@ -15,17 +16,22 @@ const PDFProcessor = () => {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Handle file upload logic here
+      // Handle file upload logic here (not implemented in this snippet)
       console.log('File uploaded:', file);
     }
   };
 
   const handleGenerate = async () => {
     if (!text) return;
-    
+
     setProcessing(true);
     try {
-      const endpoint = mode === 'questions' ? '/api/generate-questions' : '/api/summarize';
+      const API_BASE = 'https://arush1234sharma-querio-backend.hf.space';
+      const endpoint =
+        mode === 'questions'
+          ? `${API_BASE}/api/generate-questions`
+          : `${API_BASE}/api/summarize`;
+
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -33,6 +39,12 @@ const PDFProcessor = () => {
         },
         body: JSON.stringify({ text }),
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`API Error: ${response.status} - ${errorText}`);
+      }
+
       const data = await response.json();
       setResult(data);
     } catch (error) {
@@ -91,7 +103,7 @@ const PDFProcessor = () => {
                 value={text}
                 onChange={handleTextChange}
               />
-              
+
               <div className="flex gap-4 mt-4">
                 <label className="flex-1">
                   <input
@@ -105,7 +117,7 @@ const PDFProcessor = () => {
                     <span>Upload PDF</span>
                   </div>
                 </label>
-                
+
                 <div className="glass-effect rounded-xl p-2 flex">
                   <button
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
@@ -152,7 +164,7 @@ const PDFProcessor = () => {
                 Generated {mode === 'questions' ? 'questions' : 'summary'} will appear here
               </div>
             )}
-            
+
             {result && mode === 'questions' && (
               <div className="space-y-6">
                 {result.questions?.map((question, index) => (
@@ -192,4 +204,4 @@ const PDFProcessor = () => {
   );
 };
 
-export default PDFProcessor; 
+export default PDFProcessor;
